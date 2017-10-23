@@ -10,5 +10,24 @@ set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
 find_package(Boost COMPONENTS system REQUIRED)
 
 file(GLOB_RECURSE SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/*.cpp)
+set(CLIENT_SOURCES ${SOURCE_FILES})
+list(REMOVE_ITEM CLIENT_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/main_server.cpp)
 
-add_executable(gm ${SOURCE_FILES})
+set(SERVER_SOURCES ${SOURCE_FILES})
+list(REMOVE_ITEM SERVER_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/main_client.cpp)
+
+add_executable(client ${CLIENT_SOURCES})
+add_executable(server ${SERVER_SOURCES})
+
+message(${CLIENT_SOURCES})
+message(${SERVER_SOURCES})
+
+target_link_libraries(client
+		pthread
+        ${Boost_LIBRARIES}
+)
+
+target_link_libraries(server
+		pthread
+        ${Boost_LIBRARIES}
+)
