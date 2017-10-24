@@ -7,3 +7,7 @@ or if you are lazy just run build_me.sh ...
 
 after succesfull build run from your terminal:
 ./client
+
+if your os doesn't have requeired libraries try run app from docker image
+docker run -i -t --entrypoint /bin/bash ${DOCKER_IMAGE}
+binaries are in /home/source/build/
